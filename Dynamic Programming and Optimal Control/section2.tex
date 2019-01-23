@@ -1,0 +1,36 @@
+\section*{Problem Statement}
+\subsection*{Dynamics}
+$x_{k+1} = f_k(x_k, u_k, w_k),\ k=0,\dots,N-1$
+\subsection*{Cost Function}
+$C(x) = g_N(x_N) + \sum_{k=0}^{N-1}g_k(x_k,u_k,w_k)$
+\subsection*{Expected Cost}
+$\mathbb{E}_{X_1,U_0,W_0|x_o}[C(X)]$
+
+\section*{Open/Closed Loop Control}
+\subsection*{Open Loop Control}
+All control inputs given $x_0$\\
+$N_u^N$ different strategies
+\subsection*{Closed Loop Control}
+Optimal policy $\pi^* = (\mu_0,\dots,\mu_{N-1})$ given $x_0$.\\
+Closed Loop Expected Cost: $J_{\pi}(x)$ \\
+$N_u^{N_x(N-1)+1}$ different strategies
+
+\section*{Dynamic Programing Algorithm}
+\subsection*{Initialization}
+$J_N(x) = g_N(x),\ \forall x \in S_N$
+\subsection*{Recursion}
+$J_k(x) = min_{u\in U_k(x)} \mathbb{E}_{w_k|x, u}[g_k + J_{k+1}]$\\
+$\forall x \in S_k, \ k = N-1, \dots, 0$
+
+\section*{Convert To Standart Form}
+\subsection*{Time Lags}
+$x_{k+1} = f_k(x_k,x_{k-1}, u_k, u_{k-1}, w_k)$\\
+$y_k = x_{k-1}, \ s_k=u_{k-1}, \ \widetilde{x} = (x_k,y_k,s_k)$\\
+$\widetilde{x}_{k+1} = \left[\begin{matrix}f_k(x_k,y_k,u_k,s_k,w_k)\\x_k\\u_k \end{matrix}\right] = \widetilde{f}_k(\widetilde{x}_k,u_k,w_k)$
+\subsection*{Correlated Disturbances}
+$w_k = C_k y_{k+1}, \ y_{k+1} = A_k y_k + \xi_k$\\
+$A_k, C_k$ given, $\xi_k$ i.r.v.\\
+$\widetilde{x}_k = (x_k, y_k)$\\
+$\widetilde{x}_{k+1} = \left[\begin{matrix}f_k(x_k,u_k,C_k(A_ky_k + \xi_k))\\A_ky_k + \xi_k \end{matrix}\right] = \widetilde{f}_k(\widetilde{x}_k,u_k,\xi_k)$
+\subsection*{Forecasts}
+TODO

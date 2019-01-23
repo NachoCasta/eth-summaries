@@ -9,6 +9,7 @@
 \usepackage[t1]{sourcesanspro}
 %\usepackage[lf]{MyriadPro}
 %\usepackage[lf,minionint]{MinionPro}
+\usepackage{enumitem}
 \usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage[top=0mm,bottom=4mm,left=0mm,right=1mm]{geometry}
@@ -39,16 +40,16 @@ leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
 \begin{mdframed}[style=header]
 \footnotesize
 \sffamily
-Machine Learning FS17\\
-Marilou Beyeler
+Dynamic Programming and Optimal Control HS18\\
+Ignacio Castañeda
 \end{mdframed}
 }
 
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {.2ex}%
-                                {.2ex}%x
-                                {\color{myblue}\sffamily\small\bfseries}}
+            {.2ex}%
+            {.2ex}%x
+            {\color{myblue}\sffamily\small\bfseries\underline}}
 \renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
                                 {.2ex}%
                                 {.2ex}%x
@@ -173,7 +174,7 @@ Marilou Beyeler
 
 \begin{document}
 \small
-\begin{multicols*}{5}
+\begin{multicols*}{4}
 \input{section1}
 \input{section2}
 \input{section3}

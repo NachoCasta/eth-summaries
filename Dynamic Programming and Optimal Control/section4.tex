@@ -1,0 +1,31 @@
+\section*{Shortest Path Problem}
+\textbf{Path}: $Q = (i_i, \dots, i_q)$\\
+\textbf{Length}: $J_Q = \sum_{h=1}^{q-1}c_{i_h,i_{h+1}}$\\
+\textbf{Optimal Path}: $Q^* = \argmin_{Q\in \mathbb{Q}_{S,T}}J_Q$\\
+There cannot be a negative cycle in the graph
+\subsection*{Deterministic Finite State Problema (DFS)}
+Equivalent to SP\\
+$N = |V|$\\
+$S_0 = s,\ S_N = T,\ S_k = V$\\
+$x_{k+1} = u_k$\\
+$g_N(T) = 0, \ g_k(x_k,u_k) = c_{x_k,u_k}$\\
+Solve with DPA, $J_k(i)$ is the optimal cost of getting from $i$ to $T$ in $N-k$ moves.\\
+$J_N(T) = 0$\\
+$J_{N-1}(i) = c_{iT}$\\
+$J_k(i) = \min_j(c_{ij} + J_{k+1}(j))$
+\subsection*{Hidden Markov Models}
+Can be converted in a SP problem. We use artificial nodes $s$ and $T$ and we use the negative log likelihood as the weights.
+\subsection*{Label Correcting Algorithm}
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt]
+	\item Place node $s$ in OPEN, set $d_s=0$ and $d_j = \infty \ \forall j$
+	\item Remove a node $i$ from OPEN and execute step 3 for all children of $j$ of $i$ (nodes you can go from $i$)
+	\item If $d_i + c_{i,j} < d_j$ and $d_i + c_{i,j} < d_T$, set $d_j = d_i + c_{i,j}$ and set $i$ to be parent of $j$. If $j \neq T$, put $j$ in OPEN
+	\item If OPEN is not empty, go to step 2
+\end{enumerate}
+Removing nodes from OPEN:\\
+\textbf{Depth-First Search}: LIFO (Stack)\\
+\textbf{Breadth-First Search}: FIFO (Queue)\\
+\textbf{Best-First Search}: Node with best label (Dijkstra)
+\subsection*{A*-algorithm}
+Modification of LCA. In step 3, for node $j$ to be admited in OPEN, it must fulfill\\
+$d_i + c_{i,j} + h_j < d_T$ where $h_j$ is a lower bound constructed from problem knowledge.

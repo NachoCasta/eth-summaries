@@ -1,0 +1,41 @@
+\section*{Infinite Horizon Problems}
+$J_N(x) = 0, \ \forall x \in S$\\
+$l = N-k, \ V_l = J_{N-l}$\\
+$\lim_{N\rightarrow \infty} V_l(x) = J(x)$
+
+\subsection*{Bellman Equation}
+$J(x) = min_u \mathbb{E}_{w|x,u}[g(x,u,w) + J(f(x,u,w))]$\\
+$\forall x \in S$
+
+\subsection*{Stochastic Shortest Path}
+Time invariant transition probabilities and there is a cost-free termination state. BE yields optimal cost-to-go and optimal stationary policy. Unique solution. \\
+$J^*(i) = min_u (q(i,u)+\sum_{j=1}^n P_{ij}(u)J^*(j)) \ \forall i \in S$
+\subsection*{Value Iteration}
+Arbitrary initialization until it converges.\\
+$V_{l+1}(i) = min-u (q(i, u) + \sum_{j=1}^nP_{ij}(u)V_l(j))\ \forall i \in S$\\
+Stop when $||V_{l+1}(i) - V_l(i)||, \ \forall i \in S$\\
+Complexity $\mathbb(O)(n^2p)$ per iteration\\
+Requires (generally) inifnite iterations.\\
+\subsection*{Policy Iteration}
+Initialize with a proper policy $\mu^0$\\
+\textbf{Stage 1}: Solve following linear system for $\mu^h$\\
+$J_{\mu^h}(i) = q(i,\mu^h(i))+\sum_{j=1}^n P_{ij}(\mu^h(i))J_{\mu^h}(j)) \ \forall i \in S$\\
+\textbf{Stage 2}: Obtain new policy $\mu^{h+1}$ satisfying\\
+$\mu^{h+1}(i) = argmin_u (q(i,u)+\sum_{j=1}^n P_{ij}(u)J_{\mu^h}(j))$\\
+$\forall i \in S$\\
+Iterate between 1 and 2 until\\
+$J_{\mu^{h+1}}(i) = J_{\mu^h}(i)\ \forall i \in S$\\
+Complexity $\mathbb(O)(n^2(n+p))$ per iteration\\
+Worst case: $p^n$ iterations
+\subsection*{Linear Programming}
+maximize $\sum_{i\in S+} V(i)$ subject to\\
+$V(i) \leq q(i,u) + \sum_{j=1}^n P_{ij}(u)V(j) \ \forall u \in U(i) \ \forall i \in S$
+\subsection*{Discounted Problems}
+Stage costs are discounted exponentially. Equivalent to solving a SSP problema with a virtual termination state (0)\\
+$P_{ij}(u) = \alpha \widetilde{P}_{ij},\ u \in U$\\
+$P_{i0}(u) = 1-\alpha,\ u \in U$\\
+$P_{0j}(u) = 0,\ u = stay$\\
+$P_{00}(u) = 1,\ u = stay$\\
+$g(x,u,w) = \alpha^{-1}\widetilde{g}(x,u,w)$
+$g(x,u,0) = 0$\\
+$g(0,stay,0) = 0$
